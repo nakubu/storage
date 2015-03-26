@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+require 'drb'
+
+
+storage = DRbObject.new nil, 'druby://:9000'
+
+puts "The storage is ready"
+
+puts "storage.contains?('abc'): #{storage.contains?('abc')}"
+
+storage.add('qaz')
+puts "storage.add('qaz')}"
+puts "storage.contains?('qaz'): #{storage.contains?('qaz')}"
+
+puts "storage.find('abc'): #{storage.find 'abc'}"
+
+storage.load_from_file('./examples/load_from_file')
+puts "storage.load_from_file('./examples/load_from_file'): #{storage.load_from_file('./examples/load_from_file')}"
+
+storage.load_from_zip('./examples/load_from_zip')
+puts "storage.load_from_zip('./examples/load_from_zip'): #{storage.load_from_zip('./examples/load_from_zip')}"
+
+puts "storage.save_to_file('./examples/save_to_file'): #{storage.save_to_file('./examples/save_to_file')}"
+
+puts "storage.save_to_zip('./examples/save_to_zip'): #{storage.save_to_zip('./examples/save_to_zip')}"

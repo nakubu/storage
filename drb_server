@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+require 'drb'
+require 'yaml'
+require 'zip'
+require './lib/storage'
+
+
+FRONT_OBJECT = Storage.new
+FRONT_OBJECT.load_from_file './examples/init_from_file'
+
+DRb.start_service 'druby://:9000', FRONT_OBJECT
+puts "Server running at #{DRb.uri}"
+
+trap('INT') { DRb.stop_service }
+DRb.thread.join
