@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Alexey Dunyushkin']
   s.email       = 'nakubu@gmail.com'
   s.files       = ['lib/storage.rb']
-  s.homepage    = 'https://github.com/nakubu/storage'
+  s.homepage    = 'http://github.com/nakubu/storage'
   s.license     = 'MIT'
 
   s.add_runtime_dependency 'rubyzip', '>= 1.1.7'
