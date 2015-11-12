@@ -37,7 +37,7 @@ class Storage
 
   def load_from_zip(filename)
     new_words = []
-    Zip::File.open(filename + '.zip') do |zipfile|
+    Zip::ZipFile.open(filename + '.zip') do |zipfile|
       zipfile.each do |file|
         content = file.get_input_stream.read
         new_words |= YAML.load(content)
@@ -55,7 +55,7 @@ class Storage
 
   def save_to_zip(filename)
     words = @trie.find('')
-    Zip::File.open(filename + '.zip', Zip::File::CREATE) do |zipfile|
+    Zip::ZipFile.open(filename + '.zip', Zip::ZipFile::CREATE) do |zipfile|
       zipfile.get_output_stream(filename + '.yaml') { |f| YAML.dump(words, f) }
     end
   end

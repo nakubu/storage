@@ -1,5 +1,8 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'minitest/autorun'
-require './storage'
+require_relative '../lib/storage'
 
 
 class TestStorage < Minitest::Test
@@ -42,4 +45,29 @@ class TestStorage < Minitest::Test
   def test_find_raise_argument_error
     assert_raises(ArgumentError) { @storage.find('uv') }
   end
+
+
+  def test_load_from_file
+    @storage.load_from_file './examples/load_from_file'
+    assert_equal ['abc', 'abcd', 'abcde', 'asd', 'asdf', 'asdg', 'asdgh', 'xyz', 'qwe', 'qwer', 'qwert', 'qwery'], @storage.trie.find('')
+  end
+
+
+  def test_load_from_zip
+    @storage.load_from_zip './examples/load_from_zip'
+    assert_equal ['abc', 'abcd', 'abcde', 'asd', 'asdf', 'asdg', 'asdgh', 'xyz', 'qwe', 'qwer', 'qwert', 'qwery'], @storage.trie.find('')
+  end
+
+
+  def test_save_to_file
+    @storage.save_to_file './examples/save_to_file'
+    assert File.exist?('./examples/save_to_file.yaml')
+  end
+
+
+  def test_save_to_zip
+    @storage.save_to_zip './examples/save_to_zip'
+    assert File.exist?('./examples/save_to_zip.zip')
+  end
+
 end
