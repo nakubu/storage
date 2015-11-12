@@ -1,12 +1,10 @@
 class Trie
   attr_accessor :level, :hash
 
-
   def initialize(level = 0)
     @level = level
     @hash = Hash.new
   end
-
 
   def add(string)
     letter = this_letter(string)
@@ -21,14 +19,12 @@ class Trie
     end
   end
 
-
   def find(string)
     @found_words = []
     hash = begin?(string)
     find_recursive(hash)
     @found_words
   end
-
 
   def begin?(string)
     letter = this_letter(string)
@@ -40,7 +36,6 @@ class Trie
     end
   end
 
-
   def contains?(string)
     letter = this_letter(string)
     if letter.nil?
@@ -51,9 +46,7 @@ class Trie
     end
   end
 
-
   protected
-
 
   def find_recursive(hash)
     return unless hash
@@ -65,7 +58,6 @@ class Trie
       end
     end
   end
-
 
   def this_letter(string)
     letter = string[@level, 1]

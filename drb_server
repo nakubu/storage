@@ -1,14 +1,11 @@
 #!/usr/bin/env ruby
 require 'drb'
-require 'yaml'
-require 'zip'
-require './lib/storage'
+require_relative './lib/storage'
 
+storage = Storage.new
+storage.load_from_file './examples/init_from_file'
 
-FRONT_OBJECT = Storage.new
-FRONT_OBJECT.load_from_file './examples/init_from_file'
-
-DRb.start_service 'druby://:9000', FRONT_OBJECT
+DRb.start_service 'druby://:9000', storage
 puts "Server running at #{DRb.uri}"
 
 trap('INT') { DRb.stop_service }

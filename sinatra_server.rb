@@ -2,10 +2,8 @@ require 'sinatra'
 require 'json'
 require './lib/storage'
 
-
 storage = Storage.new
 storage.load_from_file('./examples/init_from_file')
-
 
 get '/' do
   response = '/add?string – добавить строку в Storage <br>'
